@@ -2,6 +2,6 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <include file="classpath:/db/sql/0001-add-user-table.xml"/>
+    <includeAll path="classpath:/db/sql"/>
 
 </databaseChangeLog>
