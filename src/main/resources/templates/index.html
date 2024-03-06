@@ -201,14 +201,14 @@
                     <li class="bsm-tab"><a href="#register">Register</a></li>
                 </ul>
                 <div id="login" class="bsm-tab-content">
-                    <form action="#" method="post" class="login-form">
+                    <form action="/login" method="post" class="login-form">
                         <div class="bsm-input-field">
-                            <input id="login_user_name" type="text" class="validate">
-                            <label for="login_user_name">User Name</label>
+                            <input id="login_user_name" type="text" class="validate" name="username">
+                            <label for="login_user_name">Email</label>
                         </div>
                         <div class="bsm-input-field">
-                            <input id="login_passwords" type="password" class="validate">
-                            <label for="login_passwords">Passwords</label>
+                            <input id="login_passwords" type="password" class="validate" name="password">
+                            <label for="login_passwords">Password</label>
                         </div>
                         <div class="remember-field">
                             <input type="checkbox" id="remember">
@@ -218,22 +218,26 @@
                     </form>
                 </div>
                 <div id="register" class="bsm-tab-content">
-                    <form action="#" method="post" class="register-form">
+                    <form action="/users/register" method="post" class="register-form">
                         <div class="bsm-input-field">
-                            <input id="full_name" type="text" class="validate">
-                            <label for="full_name">Full Name</label>
+                            <input id="name" type="text" class="validate" name="name">
+                            <label for="name">Name</label>
                         </div>
                         <div class="bsm-input-field">
-                            <input id="user_name" type="text" class="validate">
-                            <label for="user_name">User Name</label>
+                            <input id="surname" type="text" class="validate" name="surname">
+                            <label for="surname">Surname</label>
                         </div>
                         <div class="bsm-input-field">
-                            <input id="emai" type="email" class="validate">
+                            <input id="phone_number" type="text" class="validate" name="phoneNumber">
+                            <label for="phone_number">Phone Number</label>
+                        </div>
+                        <div class="bsm-input-field">
+                            <input id="emai" type="email" class="validate" name="email">
                             <label for="emai">Email</label>
                         </div>
                         <div class="bsm-input-field">
-                            <input id="passwords" type="password" class="validate">
-                            <label for="passwords">Passwords</label>
+                            <input id="passwords" type="password" class="validate" name="password">
+                            <label for="passwords">Password</label>
                         </div>
                         <button class="bsm-btn waves-effect moody-blue-bg" type="submit" name="action">Register</button>
                     </form>

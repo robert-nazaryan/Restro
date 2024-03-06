@@ -5,5 +5,18 @@ spring:
     password: root
   liquibase:
     change-log: classpath*:/db/change-log.xml
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mailsenderforjava@gmail.com
+    password: iltifceckjkwsohf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
-
+user:
+  verify:
+    directory:
