@@ -4,14 +4,19 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.restro.entity.User;
+import org.restro.entity.WeeklyEmail;
+import org.restro.repository.WeeklyEmailRepository;
 import org.restro.service.SendMailService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +24,7 @@ public class SendMailServiceImpl implements SendMailService {
 
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
+    private final WeeklyEmailRepository weeklyEmailRepository;
 
     @Override
     @Async
@@ -54,4 +60,18 @@ public class SendMailServiceImpl implements SendMailService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    @Async
+    @Scheduled(cron = "0 0 0 * * 0")
+    public void sendWeeklyEmail() {
+        List<WeeklyEmail> all = weeklyEmailRepository.findAll();
+
+        for (WeeklyEmail email : all) {
+            send(email.getEmail(), "Weekly Email", "Hi, You will get this email every week.");
+        }
+
+    }
+
+
 }
