@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -202,6 +202,7 @@
                 </ul>
                 <div id="login" class="bsm-tab-content">
                     <form action="/login" method="post" class="login-form">
+                        <div th:if="${msg != null}" th:text="${msg}"></div>
                         <div class="bsm-input-field">
                             <input id="login_user_name" type="text" class="validate" name="username">
                             <label for="login_user_name">Email</label>
