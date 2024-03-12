@@ -5,6 +5,7 @@ import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.restro.entity.User;
 import org.restro.entity.WeeklyEmail;
+import org.restro.repository.UserRepository;
 import org.restro.repository.WeeklyEmailRepository;
 import org.restro.service.SendMailService;
 import org.springframework.mail.SimpleMailMessage;
@@ -25,6 +26,7 @@ public class SendMailServiceImpl implements SendMailService {
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
     private final WeeklyEmailRepository weeklyEmailRepository;
+    private final UserRepository userRepository;
 
     @Override
     @Async
