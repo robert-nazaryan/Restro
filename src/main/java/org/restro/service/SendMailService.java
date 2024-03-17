@@ -8,4 +8,6 @@ public interface SendMailService {
 
     void sendWelcomeMail(User user);
 
+    void sendWeeklyEmail();
+
 }

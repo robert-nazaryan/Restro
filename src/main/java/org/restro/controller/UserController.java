@@ -39,9 +39,9 @@ public class UserController {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setUserType(UserType.USER);
             userService.register(user);
-            return "redirect:/";
+            return "redirect:/?msg=Check your email for activate account";
         }
-        return "redirect:/";
+        return "redirect:/?msg=Email already in use";
     }
 
     @GetMapping("/loginSuccess")
