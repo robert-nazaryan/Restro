@@ -5,6 +5,10 @@ spring:
     password: root
   liquibase:
     change-log: classpath*:/db/change-log.xml
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
   mail:
     host: smtp.gmail.com
     port: 587
@@ -20,3 +24,8 @@ spring:
 user:
   verify:
     directory:
+
+restro:
+  picture:
+    upload:
+      directory:
