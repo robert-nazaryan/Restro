@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -202,6 +202,7 @@
                 </ul>
                 <div id="login" class="bsm-tab-content">
                     <form action="/login" method="post" class="login-form">
+                        <div th:if="${msg != null}" th:text="${msg}"></div>
                         <div class="bsm-input-field">
                             <input id="login_user_name" type="text" class="validate" name="username">
                             <label for="login_user_name">Email</label>
@@ -228,7 +229,7 @@
                             <label for="surname">Surname</label>
                         </div>
                         <div class="bsm-input-field">
-                            <input id="phone_number" type="text" class="validate" name="phoneNumber">
+                            <input id="phone_number" type="number" class="validate" name="phoneNumber">
                             <label for="phone_number">Phone Number</label>
                         </div>
                         <div class="bsm-input-field">
@@ -1780,8 +1781,8 @@
         <div class="row">
             <div class="col-md-8 full-content">
                 <form class="newsletter-form mc-embedded-subscribe-form validate citrus-theme" method="post"
-                      name="mc-embedded-subscribe-form">
-                    <input type="email" class="form-controller" placeholder="Enter your email">
+                      name="mc-embedded-subscribe-form" action="/weeklyEmail/add">
+                    <input type="email" class="form-controller" placeholder="Enter your email" name="email">
                     <button type="submit" class="mailchip-button">Subscribe</button>
                     <div class="newsletter-message">
                         <div class="subscription-success"></div>

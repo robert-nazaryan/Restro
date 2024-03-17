@@ -3,10 +3,12 @@ package org.restro.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.restro.entity.User;
 import org.restro.entity.UserType;
+import org.restro.entity.WeeklyEmail;
 import org.restro.repository.UserRepository;
 import org.restro.service.SendMailService;
 import org.restro.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.restro.service.WeeklyEmailService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,9 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     private final SendMailService sendMailService;
+    private final WeeklyEmailService weeklyEmailService;
+
 
     private final PasswordEncoder passwordEncoder;
 
@@ -36,6 +39,9 @@ public class UserServiceImpl implements UserService {
         user.setToken(activationToken);
         sendMailService.sendWelcomeMail(user);
         userRepository.save(user);
+        WeeklyEmail weeklyEmail = new WeeklyEmail();
+        weeklyEmail.setEmail(user.getEmail());
+        weeklyEmailService.save(weeklyEmail);
     }
 
     @Override

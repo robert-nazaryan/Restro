@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findAllByUserType(UserType userType);
 
+    List<User> findAllByActive(boolean active);
+
 }
