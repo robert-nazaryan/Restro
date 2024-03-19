@@ -3,7 +3,9 @@ package org.restro.controller;
 import lombok.RequiredArgsConstructor;
 import org.restro.entity.User;
 import org.restro.entity.UserType;
+import org.restro.security.SpringUser;
 import org.restro.service.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,9 +47,9 @@ public class UserController {
     }
 
     @GetMapping("/loginSuccess")
-    public String loginSuccess(@ModelAttribute("currentUser") User currentUser) {
-        if (currentUser.getUserType() == UserType.ADMIN) {
-            return "redirect:/adminPage";
+    public String loginSuccess(@AuthenticationPrincipal SpringUser springUser) {
+        if (springUser.getUser().getUserType() == UserType.ADMIN) {
+            return "redirect:/admin/index";
         }
         return "redirect:/";
     }
