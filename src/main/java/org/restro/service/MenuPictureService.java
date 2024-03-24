@@ -15,4 +15,7 @@ public interface MenuPictureService {
     List<MenuPicture> findAll();
 
     byte[] getMenuImage(String picName) throws IOException;
+
+    void findById(int id);
+
 }

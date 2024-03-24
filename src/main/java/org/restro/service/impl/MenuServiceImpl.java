@@ -38,4 +38,9 @@ public class MenuServiceImpl implements MenuService {
     public void deleteMenuById(int id) {
         menuRepository.deleteById(id);
     }
+
+    @Override
+    public List<Menu> findMenusByCategoryId(int categoryId) {
+        return menuRepository.findByCategoryId(categoryId);
+    }
 }

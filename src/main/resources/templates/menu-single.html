@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -293,54 +293,50 @@
         <div class="list-menu-tab woo-single-page">
             <div class="restu-menu-item restu-list ">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-7" th:each="menu: ${menuPage}">
                         <div class="menu-single-tab">
                             <ul class="bsm-tabs" id="menu-single-tab-menu">
                                 <li class="bsm-tab">
-                                    <a href="#menu-1"><img src="/images/restaurant/grid-menu/menu-small-1.jpg"
-                                                           alt="menu"></a>
-                                </li>
-                                <li class="bsm-tab">
-                                    <a href="#menu-2"><img src="/images/restaurant/grid-menu/menu-small-2.jpg"
-                                                           alt="menu"></a>
-                                </li>
-                                <li class="bsm-tab">
-                                    <a href="#menu-3"><img src="/images/restaurant/grid-menu/menu-small-3.jpg"
-                                                           alt="menu"></a>
+                                    <a href="#menu-1"> <img th:each="manuPicture: ${menusPic}"
+                                                            th:if="${menu.id} == ${manuPicture.menu.id}"
+                                                            th:src="@{/getImage(picName=${manuPicture.picName})}"
+                                                            alt=""
+                                                            class="user-image img-fluid">
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                         <figure class="menu-thumbnail">
-                            <img id="menu-1" src="/images/restaurant/grid-menu/menu-big-1.jpg" alt="menu">
-                            <img id="menu-2" src="/images/restaurant/grid-menu/menu-big-2.jpg" alt="menu">
-                            <img id="menu-3" src="/images/restaurant/grid-menu/menu-big-3.jpg" alt="menu">
+                            <img id="menu-1" th:each="manuPicture: ${menusPic}"
+                                 th:if="${menu.id} == ${manuPicture.menu.id}"
+                                 th:src="@{/getImage(picName=${manuPicture.picName})}"
+                                 alt=""
+                                 class="user-image img-fluid">
                         </figure>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5" th:each="menu: ${menuPage}">
                         <div class="menu-desc pd-lr-0">
-                            <h2 class="menu-title"><a href="#">Etiam Consequat Special Soup</a></h2>
+                            <h2 class="menu-title" th:text="${menu.name}"><a href="#"></a></h2>
                             <div class="rating-content">
-<span class="star-rating">
-<i class="pe-7s-star"></i>
-<i class="pe-7s-star"></i>
-<i class="pe-7s-star"></i>
-<i class="pe-7s-star"></i>
-<i class="pe-7s-star"></i>
+                                          <span class="star-rating">
+                                                      <i class="pe-7s-star"></i>
+                                                      <i class="pe-7s-star"></i>
+                                                      <i class="pe-7s-star"></i>
+                                                      <i class="pe-7s-star"></i>
+                                                      <i class="pe-7s-star"></i>
 </span>
                                 <span class="devide">|</span>
                                 <span class="rating-content">5 Review</span>
                             </div>
-                            <div class="price"><span>$</span>4.9</div>
+                            <div class="price" th:text="${menu.price}">$</div>
                             <div class="sku"><p>SKU: 123456K25</p></div>
                             <div class="menu-meta">
                                 <div class="menu-cat">
-                                    <a href="#">Non Vegetarian</a>
+                                    <a th:text="${menu.category.name}"></a>
                                 </div>
                             </div>
                             <div class="menu-desc-list">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <p th:text="${menu.description}"></p>
                             </div>
                             <div class="menu-price">
                                 <div class="order-block fl-none">

@@ -398,7 +398,9 @@
                         <tr th:each="manus: ${manu}">
                           <td class="py-1" >
 <!--                            <img th:if="${manuPictures.picName != null}" alt="" >-->
-                            <img th:each="manuPictures: ${manuPicture}" th:src="@{/admin/getImage(picName=${manuPictures.picName})}" alt=""
+                            <img th:each="manuPictures: ${manuPicture}"
+                                 th:if="${manus.id} == ${manuPictures.menu.id}"
+                                 th:src="@{/admin/getImage(picName=${manuPictures.picName})}" alt=""
                                  class="user-image img-fluid">
 <!--                            <img src="/images/offer-img.png" alt="avatar"-->
 <!--                                 class="user-image img-fluid">-->

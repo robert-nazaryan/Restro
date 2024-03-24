@@ -17,4 +17,6 @@ public interface MenuService {
     void updateMenu(Menu menu);
 
     void deleteMenuById(int id);
+
+    List<Menu> findMenusByCategoryId(int categoryId);
 }
