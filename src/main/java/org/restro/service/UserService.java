@@ -1,7 +1,6 @@
 package org.restro.service;
 
 
-
 import org.restro.entity.User;
 import org.restro.entity.UserType;
 
@@ -25,6 +24,7 @@ public interface UserService {
     List<User> findByUserType(UserType userType);
 
     void deleteUserById(int id);
+
     Optional<User> findById(int id);
 
     void updateUser(User user);

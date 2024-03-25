@@ -13,6 +13,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/users/profile/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
