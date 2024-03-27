@@ -7,8 +7,8 @@ import org.restro.entity.WeeklyEmail;
 import org.restro.repository.UserRepository;
 import org.restro.service.SendMailService;
 import org.restro.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.restro.service.WeeklyEmailService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -81,6 +81,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
+        user.setActive(true);
         userRepository.save(user);
     }
 
