@@ -64,4 +64,9 @@ public class MenuPictureServiceImpl implements MenuPictureService {
             return IOUtils.toByteArray(inputStream);
 
     }
+
+    @Override
+    public void findById(int id) {
+        menuPictureRepository.findById(id);
+    }
 }

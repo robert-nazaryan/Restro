@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -278,167 +278,60 @@
     </div>
 </section>
 
-<section class="our-menu-block pd-tb-90">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center full-content mrb-60">
-                <h2 class="section-title no-border">Breakfast</h2>
-                <div class="resturent-title-border">
-                    <i class="lit lit-restaurent-knife"></i>
-                </div>
-            </div>
+<!--<div class="row">-->
+<!--    <div class="col-md-12">-->
+<!--        <ul class="restaurant-tab-v2 bsm-tabs">-->
+<!--                <li class="bsm-tab" th:each="categorie: ${categories}" th:text="${categorie.name}"></li>-->
+
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<section class="our-menu-block pd-tb-90" >
+    <div class="container" >
+        <div class="row" >
+<!--            <ul class="resturent-tab-v2 bsm-tabs" th:each="categorys: ${categories}">-->
+<!--               <a href="#appetizers-v2-tab" class="bsm-tab" th:text="${categorys.name}"></a>-->
+
+
+<!--            </ul>-->
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" >
                 <div class="regular-menu">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="restu-menu-item menu-v2">
+                        <div class="col-lg-6 restu-menu-item menu-v2" th:each="menus: ${menu}">
+                            <div >
                                 <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">
+                                    <img th:each="manuPictures: ${manuPicture}"
+                                         th:if="${menus.id} == ${manuPictures.menu.id}"
+                                         th:src="@{/menu/getImage(picName=${manuPictures.picName})}" alt=""
+                                         class="user-image img-fluid">
                                 </figure>
-                                <div class="menu-desc row align-items-center">
+
+                                <div class="menu-desc row align-items-center" >
+
                                     <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
+                                        <a th:text="${menus.name}" th:href="@{'/menu/' + ${menus.id}}" class="menu-title" ></a>
                                         <div class="menu-meta">
                                             <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
+                                                <a th:text="${menus.name}" th:href="@{'/menu/' + ${menus.id}}"></a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="right-part col-6 col-md-6 col-xl-5">
                                         <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
+                                            <div class="price" th:text="${menus.price}"><span>$</span></div>
                                             <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
+                                                <a href="/contact" class="order-btn">Order</a>
                                                 <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -447,512 +340,512 @@
     </div>
 </section>
 
-<section class="our-menu-block pd-tb-90 bg-snow">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center full-content mrb-60">
-                <h2 class="section-title no-border">Lunch</h2>
-                <div class="resturent-title-border">
-                    <i class="lit lit-restaurent-knife"></i>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="regular-menu">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!--<section class="our-menu-block pd-tb-90 bg-snow">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6 text-center full-content mrb-60">-->
+<!--                <h2 class="section-title no-border">Lunch</h2>-->
+<!--                <div class="resturent-title-border">-->
+<!--                    <i class="lit lit-restaurent-knife"></i>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="regular-menu">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
-<section class="our-menu-block pd-tb-90">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center full-content mrb-60">
-                <h2 class="section-title no-border">Dinner</h2>
-                <div class="resturent-title-border">
-                    <i class="lit lit-restaurent-knife"></i>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="regular-menu">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!--<section class="our-menu-block pd-tb-90">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6 text-center full-content mrb-60">-->
+<!--                <h2 class="section-title no-border">Dinner</h2>-->
+<!--                <div class="resturent-title-border">-->
+<!--                    <i class="lit lit-restaurent-knife"></i>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="regular-menu">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
-<section class="our-menu-block pd-tb-90" style="background-image: url(/images/restaurant/newletter-pattern.jpg);">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center full-content mrb-60">
-                <h2 class="section-title no-border">Drinks</h2>
-                <div class="resturent-title-border">
-                    <i class="lit lit-restaurent-knife"></i>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="regular-menu">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="restu-menu-item menu-v2">
-                                <figure class="menu-thumbnail">
-                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">
-                                </figure>
-                                <div class="menu-desc row align-items-center">
-                                    <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>
-                                        <div class="menu-meta">
-                                            <div class="menu-cat">
-                                                <a href="#">Vegetarian</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right-part col-6 col-md-6 col-xl-5">
-                                        <div class="menu-price">
-                                            <div class="price"><span>$</span>3.9</div>
-                                            <div class="order-block">
-                                                <a href="#" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!--<section class="our-menu-block pd-tb-90" style="background-image: url(/images/restaurant/newletter-pattern.jpg);">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6 text-center full-content mrb-60">-->
+<!--                <h2 class="section-title no-border">Drinks</h2>-->
+<!--                <div class="resturent-title-border">-->
+<!--                    <i class="lit lit-restaurent-knife"></i>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="regular-menu">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-1.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-2.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="restu-menu-item menu-v2">-->
+<!--                                <figure class="menu-thumbnail">-->
+<!--                                    <img src="/images/restaurant/bestseller/menu-3.png" alt="menu">-->
+<!--                                </figure>-->
+<!--                                <div class="menu-desc row align-items-center">-->
+<!--                                    <div class="left-part col-6 col-md-6 col-xl-7">-->
+<!--                                        <h2 class="menu-title"><a href="#">Etiam Consequat</a></h2>-->
+<!--                                        <div class="menu-meta">-->
+<!--                                            <div class="menu-cat">-->
+<!--                                                <a href="#">Vegetarian</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="right-part col-6 col-md-6 col-xl-5">-->
+<!--                                        <div class="menu-price">-->
+<!--                                            <div class="price"><span>$</span>3.9</div>-->
+<!--                                            <div class="order-block">-->
+<!--                                                <a href="#" class="order-btn">Order</a>-->
+<!--                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
 <footer class="site-footer bg-nero">
     <div class="footer-middle citrus-theme">
