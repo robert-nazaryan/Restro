@@ -288,21 +288,21 @@
 <!--</div>-->
 
 
-<section class="our-menu-block pd-tb-90" >
-    <div class="container" >
-        <div class="row" >
-<!--            <ul class="resturent-tab-v2 bsm-tabs" th:each="categorys: ${categories}">-->
-<!--               <a href="#appetizers-v2-tab" class="bsm-tab" th:text="${categorys.name}"></a>-->
+<section class="our-menu-block pd-tb-90">
+    <div class="container">
+        <div class="row">
+            <!--            <ul class="resturent-tab-v2 bsm-tabs" th:each="categorys: ${categories}">-->
+            <!--               <a href="#appetizers-v2-tab" class="bsm-tab" th:text="${categorys.name}"></a>-->
 
 
-<!--            </ul>-->
+            <!--            </ul>-->
         </div>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <div class="regular-menu">
                     <div class="row">
                         <div class="col-lg-6 restu-menu-item menu-v2" th:each="menus: ${menu}">
-                            <div >
+                            <div>
                                 <figure class="menu-thumbnail">
                                     <img th:each="manuPictures: ${manuPicture}"
                                          th:if="${menus.id} == ${manuPictures.menu.id}"
@@ -310,10 +310,11 @@
                                          class="user-image img-fluid">
                                 </figure>
 
-                                <div class="menu-desc row align-items-center" >
+                                <div class="menu-desc row align-items-center">
 
                                     <div class="left-part col-6 col-md-6 col-xl-7">
-                                        <a th:text="${menus.name}" th:href="@{'/menu/' + ${menus.id}}" class="menu-title" ></a>
+                                        <a th:text="${menus.name}" th:href="@{'/menu/' + ${menus.id}}"
+                                           class="menu-title"></a>
                                         <div class="menu-meta">
                                             <div class="menu-cat">
                                                 <a th:text="${menus.name}" th:href="@{'/menu/' + ${menus.id}}"></a>
@@ -325,7 +326,10 @@
                                             <div class="price" th:text="${menus.price}"><span>$</span></div>
                                             <div class="order-block">
                                                 <a href="/contact" class="order-btn">Order</a>
-                                                <a href="#" class="wishlist-btn"><i class="pe-7s-like"></i></a>
+                                                <a class="order-btn"
+                                                   th:if="${!menus.isFavorite() && currentUser != null}"
+                                                   th:href="@{'/favoriteMenu/' + ${menus.id}}"><i
+                                                        class="pe-7s-like"></i></a>
                                             </div>
                                         </div>
                                     </div>

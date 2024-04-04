@@ -7,6 +7,18 @@
     <title>Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/admin/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/admin/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="/admin/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="/admin/images/favicon.png"/>
     <style type="text/css">
         body {
             margin-top: 20px;
@@ -33,6 +45,10 @@
             background-clip: border-box;
             border: 0 solid rgba(0, 0, 0, .125);
             border-radius: .25rem;
+        }
+
+        .table table-striped {
+            background: #fff;
         }
 
         .card-body {
@@ -119,6 +135,36 @@
                 </div>
             </div>
         </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> Image</th>
+                <th> Name</th>
+                <th> Price</th>
+                <th> Description</th>
+                <th> Category Name</th>
+                <th> Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="favorite: ${favorites}">
+                <td class="py-1">
+                    <img th:each="manuPicture: ${manuPictures}"
+                         th:if="${favorite.menu.id} == ${manuPicture.menu.id}"
+                         th:src="@{/favoriteMenu/getImage(picName=${manuPicture.picName})}" alt=""
+                         class="user-image img-fluid">
+                </td>
+                <td th:text="${favorite.menu.name}"></td>
+                <td th:text="${favorite.menu.price}"></td>
+                <td th:text="${favorite.menu.description}"></td>
+                <td th:text="${favorite.menu.category.name}"></td>
+                <td><a class="btn btn-danger btn-fw" type="submit"
+                       th:href="@{'/favoriteMenu/delete/' + ${favorite.menu.id}}">
+                    <i class="icon-pencil">Delete</i> </a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
