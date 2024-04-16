@@ -28,4 +28,4 @@ user:
 restro:
   picture:
     upload:
-      directory:
+      directory: D:\UploadDirectory 
