@@ -1,9 +1,11 @@
 package org.restro.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.restro.entity.User;
 import org.restro.entity.UserType;
 import org.restro.entity.WeeklyEmail;
+import org.restro.exception.UserNotFoundException;
 import org.restro.repository.UserRepository;
 import org.restro.service.SendMailService;
 import org.restro.service.UserService;
@@ -17,6 +19,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -30,6 +33,7 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.password));
         userRepository.save(user);
+        log.info("User saved: {}", user);
     }
 
     @Override
@@ -39,6 +43,7 @@ public class UserServiceImpl implements UserService {
         user.setToken(activationToken);
         sendMailService.sendWelcomeMail(user);
         userRepository.save(user);
+        log.info("User registered: {}", user);
         WeeklyEmail weeklyEmail = new WeeklyEmail();
         weeklyEmail.setEmail(user.getEmail());
         weeklyEmailService.save(weeklyEmail);
@@ -51,12 +56,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElse(null);
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User not found with email: " + email));
     }
 
     @Override
     public User findByToken(String token) {
-        return userRepository.findByToken(token).orElse(null);
+        return userRepository.findByToken(token).orElseThrow(() -> new UserNotFoundException("User not found with token: " + token));
     }
 
     @Override
@@ -83,6 +89,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User user) {
         user.setActive(true);
         userRepository.save(user);
+        log.info("User updated: {}", user);
     }
 
     @Override

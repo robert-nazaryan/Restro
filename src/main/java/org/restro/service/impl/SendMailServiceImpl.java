@@ -3,9 +3,9 @@ package org.restro.service.impl;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.restro.entity.User;
 import org.restro.entity.WeeklyEmail;
-import org.restro.repository.UserRepository;
 import org.restro.repository.WeeklyEmailRepository;
 import org.restro.service.SendMailService;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,12 +21,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SendMailServiceImpl implements SendMailService {
 
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
     private final WeeklyEmailRepository weeklyEmailRepository;
-    private final UserRepository userRepository;
 
     @Override
     @Async
@@ -36,6 +36,7 @@ public class SendMailServiceImpl implements SendMailService {
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(message);
         javaMailSender.send(simpleMailMessage);
+        log.info("Sent email to {}", to);
     }
 
     @Override
@@ -61,6 +62,7 @@ public class SendMailServiceImpl implements SendMailService {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+        log.info("Welcome mail sent");
     }
 
     @Override
@@ -72,6 +74,7 @@ public class SendMailServiceImpl implements SendMailService {
         for (WeeklyEmail email : all) {
             send(email.getEmail(), "Weekly Email", "Hi, You will get this email every week.");
         }
+        log.info("Sent weekly emails");
 
     }
 

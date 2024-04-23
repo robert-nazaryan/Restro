@@ -1,6 +1,7 @@
 package org.restro.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.restro.controller.constants.AdminUrlConstants;
 import org.restro.entity.MenuPicture;
 import org.restro.entity.User;
@@ -22,6 +23,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -36,6 +38,7 @@ public class UserController {
             byToken.setActive(true);
             byToken.setToken(null);
             userService.save(byToken);
+            log.info("User with email {} verified", byToken.getEmail());
         }
         return "redirect:/";
     }
@@ -47,16 +50,20 @@ public class UserController {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setUserType(UserType.USER);
             userService.register(user);
+            log.info("User with email {} registered", user.getEmail());
             return "redirect:/?msg=Check your email for activate account";
         }
+        log.info("User with email {} already registered", user.getEmail());
         return "redirect:/?msg=Email already in use";
     }
 
     @GetMapping("/loginSuccess")
     public String loginSuccess(@ModelAttribute("currentUser") User currentUser) {
         if (currentUser.getUserType() == UserType.ADMIN) {
+            log.info("Admin with email {} logged in", currentUser.getEmail());
             return AdminUrlConstants.REDIRECT_ADMIN_INDEX;
         }
+        log.info("User with email {} logged in", currentUser.getEmail());
         return "redirect:/index";
     }
 
