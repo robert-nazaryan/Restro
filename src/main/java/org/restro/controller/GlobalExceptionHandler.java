@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(FavoriteMenuNotFoundException.class)
     public ModelAndView handleMenuNotFoundException(FavoriteMenuNotFoundException ex) {
-        log.error("Menu not found", ex);
+        log.error("Favorite Menu not found", ex);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("errorMessage", ex.getMessage());
         modelAndView.setViewName(notFoundPagePath);
