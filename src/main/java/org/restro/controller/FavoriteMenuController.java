@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.restro.entity.FavoriteMenu;
 import org.restro.entity.User;
-import org.restro.exception.MenuNotFoundException;
+import org.restro.exception.FavoriteMenuNotFoundException;
 import org.restro.security.SpringUser;
 import org.restro.service.FavoriteMenuService;
 import org.restro.service.MenuPictureService;
@@ -35,7 +35,7 @@ public class FavoriteMenuController {
     public String menuSinglePage(@PathVariable("menuId") int menuId, @ModelAttribute("currentUser") User currentUser) {
         FavoriteMenu favoriteMenu = new FavoriteMenu();
         favoriteMenu.setMenu(menuService.findById(menuId)
-                .orElseThrow(() -> new MenuNotFoundException("Menu not found with ID: " + menuId)));
+                .orElseThrow(() -> new FavoriteMenuNotFoundException("Favorite menu not found with ID: " + menuId)));
         favoriteMenu.setUser(currentUser);
         log.info("User with id: {} add to favorites menu with id: {}", currentUser.id, favoriteMenu.getMenu().getId());
         favoriteMenuService.save(favoriteMenu);

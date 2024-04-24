@@ -1,7 +1,7 @@
 package org.restro.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.restro.exception.MenuNotFoundException;
+import org.restro.exception.FavoriteMenuNotFoundException;
 import org.restro.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,8 +33,8 @@ public class GlobalExceptionHandler {
         return modelAndView;
     }
 
-    @ExceptionHandler(MenuNotFoundException.class)
-    public ModelAndView handleMenuNotFoundException(MenuNotFoundException ex) {
+    @ExceptionHandler(FavoriteMenuNotFoundException.class)
+    public ModelAndView handleMenuNotFoundException(FavoriteMenuNotFoundException ex) {
         log.error("Menu not found", ex);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("errorMessage", ex.getMessage());
