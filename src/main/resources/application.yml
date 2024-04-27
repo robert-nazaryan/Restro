@@ -28,4 +28,27 @@ user:
 restro:
   picture:
     upload:
-      directory: D:\UploadDirectory 
+      directory:
+
+logging:
+  level:
+    root: info
+    .org.restro: debug
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+  file:
+    name:
+
+server:
+  error:
+    path: /error
+
+error:
+  page:
+    path: "/errors/error"
+
+not-found:
+  page:
+    path: "/errors/404"
+

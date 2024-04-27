@@ -1,6 +1,7 @@
 package org.restro.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.restro.entity.FavoriteMenu;
 import org.restro.entity.Menu;
 import org.restro.repository.FavoriteMenuRepository;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class FavoriteMenuServiceImpl implements FavoriteMenuService {
 
     private final FavoriteMenuRepository favoriteMenuRepository;
@@ -21,11 +23,13 @@ public class FavoriteMenuServiceImpl implements FavoriteMenuService {
     @Override
     public void save(FavoriteMenu favoriteMenu) {
         favoriteMenuRepository.save(favoriteMenu);
+        log.info("Saving favorite menu with id: {}", favoriteMenu.getId());
     }
 
     @Override
     public void deleteByMenuIdAndUserId(int menuId, int userId) {
         favoriteMenuRepository.deleteByMenuIdAndUserId(menuId, userId);
+        log.info("User with id: {} delete his favorite menu with id: {}", userId, menuId);
     }
 
     @Override
@@ -48,12 +52,8 @@ public class FavoriteMenuServiceImpl implements FavoriteMenuService {
                 }
             }
         }
+        log.info("Marking all favorite menus for user with id: {}", userId);
         return menus;
-    }
-
-    @Override
-    public void deleteById(int id) {
-        favoriteMenuRepository.deleteById(id);
     }
 
 }

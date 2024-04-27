@@ -18,6 +18,4 @@ public interface FavoriteMenuService {
 
     List<Menu> markFavorites(int userId, List<Menu> menus);
 
-    void deleteById(int id);
-
 }

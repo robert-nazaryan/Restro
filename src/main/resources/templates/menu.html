@@ -42,7 +42,7 @@
             <div class="col-5 col-sm-6 col-md-6 col-lg-6 col-xl-2">
                 <div class="header-left">
                     <div class="site-logo">
-                        <a href="index.html">
+                        <a href="#">
                             <img src="/images/resturent-logo.png" alt="site-logo">
                         </a>
                     </div>
@@ -56,17 +56,18 @@
                             <div class="menu-content">
                                 <ul class="mainmenu">
                                     <li>
-                                        <a href="/index">Home</a>
+                                        <a href="/index" class="active">Home</a>
                                         <ul class="sub-menu">
                                             <li><a href="/index">Home One</a></li>
-                                            <li><a href="/index">Home Two</a></li>
+                                            <li><a href="/index-2">Home
+                                                Two</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="/about-page">About</a>
                                     </li>
                                     <li>
-                                        <a href="/menu" class="active">Menu</a>
+                                        <a href="/menu">Menu</a>
                                         <!--                                        <ul class="sub-menu">-->
                                         <!--                                            <li><a href="menu.html">Menu One</a></li>-->
                                         <!--                                            <li><a href="menu-2.html">Menu Grid &amp; List</a></li>-->
@@ -75,9 +76,11 @@
                                         <!--                                        </ul>-->
                                     </li>
                                     <li>
-                                        <a href="#">Pages</a>
+                                        <a href="/">Pages</a>
                                         <ul class="sub-menu">
                                             <li><a href="/checkout-page">Checkout Pages</a></li>
+                                            <!--                                            <li><a href="coming-soon.html">Coming Soon Page</a></li>-->
+                                            <!--                                            <li><a href="404.html">404 Page</a></li>-->
                                         </ul>
                                     </li>
                                     <li>
@@ -99,7 +102,11 @@
                 <div class="header-right">
                     <ul class="right-menu">
                         <li><a href="#" class="search-extend"><i class="pe-7s-search"></i></a></li>
-                        <li><a href="#login-register" class="user-registration" data-toggle="modal"
+                        <li th:if="${currentUser != null}">
+                            <a href="/users/profile"><i class="pe-7s-users"></i></a>
+                        <li th:unless="${currentUser != null}">
+                            <a href="#login-register" class="user-registration"
+                               data-toggle="modal"
                                data-target="#login-register"><i class="pe-7s-users"></i></a></li>
                         <li><a href="#" class="hamburger-menu"><i class="icon-arrows-hamburger-2"></i></a></li>
                     </ul>
