@@ -4,7 +4,7 @@
 
     <changeSet id="0001-create-user-table" author="rnazaryan">
         <createTable tableName="user">
-            <column name="id" type="int(11)" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">

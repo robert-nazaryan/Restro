@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    void save(User user);
+    User save(User user);
 
     void register(User user);
 
@@ -28,8 +28,5 @@ public interface UserService {
     Optional<User> findById(int id);
 
     void updateUser(User user);
-
-    int getUserCount();
-
 
 }

@@ -30,10 +30,11 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.password));
         userRepository.save(user);
         log.info("User saved: {}", user);
+        return user;
     }
 
     @Override
@@ -92,8 +93,4 @@ public class UserServiceImpl implements UserService {
         log.info("User updated: {}", user);
     }
 
-    @Override
-    public int getUserCount() {
-        return userRepository.findAll().size();
-    }
 }

@@ -3,12 +3,17 @@ package org.restro.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.restro.controller.constants.AdminUrlConstants;
+import org.restro.entity.FavoriteMenu;
 import org.restro.entity.MenuPicture;
 import org.restro.entity.User;
 import org.restro.entity.UserType;
+import org.restro.exception.UserNotFoundException;
 import org.restro.service.FavoriteMenuService;
 import org.restro.service.MenuPictureService;
 import org.restro.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/users")
@@ -37,7 +44,7 @@ public class UserController {
         if (byToken != null) {
             byToken.setActive(true);
             byToken.setToken(null);
-            userService.save(byToken);
+            userService.updateUser(byToken);
             log.info("User with email {} verified", byToken.getEmail());
         }
         return "redirect:/";
@@ -45,8 +52,9 @@ public class UserController {
 
     @PostMapping("/register")
     public String userRegister(@ModelAttribute User user) {
-        User byEmail = userService.findByEmail(user.getEmail());
-        if (byEmail == null) {
+        try {
+            userService.findByEmail(user.getEmail());
+        } catch (UserNotFoundException e) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setUserType(UserType.USER);
             userService.register(user);
@@ -68,11 +76,28 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String profilePage(@ModelAttribute("currentUser") User currentUser, ModelMap modelMap) {
+    public String profilePage(@ModelAttribute("currentUser") User currentUser, ModelMap modelMap,
+                              @RequestParam(value = "page", defaultValue = "1", required = false) int page,
+                              @RequestParam(value = "size", defaultValue = "3", required = false) int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
         List<MenuPicture> menuPictures = menuPictureService.findAll();
+        Page<FavoriteMenu> allByUserId = favoriteMenuService.findAllByUserId(currentUser.id, pageable);
+
         modelMap.addAttribute("currentUser", currentUser);
-        modelMap.addAttribute("favorites", favoriteMenuService.findAllByUserId(currentUser.id));
+        modelMap.addAttribute("favorites", allByUserId);
         modelMap.addAttribute("manuPictures", menuPictures);
+
+        int totalPages = 0;
+        if (allByUserId != null) {
+            totalPages = allByUserId.getTotalPages();
+        }
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelMap.addAttribute("pageNumbers", pageNumbers);
+        }
+
         return "/user-profile";
     }
 

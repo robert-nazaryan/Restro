@@ -4,16 +4,26 @@
 
     <changeSet id="0006-favorite-menu-table" author="rnazaryan">
         <createTable tableName="favorite_menu">
-            <column name="id" type="int(11)" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="user_id" type="int(11)">
-                <constraints nullable="false" foreignKeyName="fk_favorite_menu_user" references="user(id)"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
             </column>
-            <column name="menu_id" type="int(11)">
-                <constraints nullable="false" foreignKeyName="fk_favorite_menu_menu" references="menu(id)"/>
+            <column name="menu_id" type="BIGINT">
+                <constraints nullable="false"/>
             </column>
         </createTable>
+        <addForeignKeyConstraint baseTableName="favorite_menu"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_favorite_menu_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="favorite_menu"
+                                 baseColumnNames="menu_id"
+                                 constraintName="fk_favorite_menu_menu"
+                                 referencedTableName="menu"
+                                 referencedColumnNames="id"/>
     </changeSet>
 
 </databaseChangeLog>

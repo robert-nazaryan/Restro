@@ -4,7 +4,7 @@
 
     <changeSet id="0002-create-category-table" author="rnazaryan">
         <createTable tableName="category">
-            <column name="id" type="int(11)" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
