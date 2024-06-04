@@ -6,6 +6,8 @@ import org.restro.entity.FavoriteMenu;
 import org.restro.entity.Menu;
 import org.restro.repository.FavoriteMenuRepository;
 import org.restro.service.FavoriteMenuService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,8 +40,8 @@ public class FavoriteMenuServiceImpl implements FavoriteMenuService {
     }
 
     @Override
-    public List<FavoriteMenu> findAllByUserId(int id) {
-        return favoriteMenuRepository.findAllByUserId(id);
+    public Page<FavoriteMenu> findAllByUserId(int id, Pageable pageable) {
+        return favoriteMenuRepository.findAllByUserId(id, pageable);
     }
 
     @Override

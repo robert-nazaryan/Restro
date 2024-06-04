@@ -28,7 +28,7 @@ user:
 restro:
   picture:
     upload:
-      directory:
+      directory: D:\UploadDirectory
 
 logging:
   level:
@@ -38,7 +38,7 @@ logging:
     rollingpolicy:
       max-file-size: 10MB
   file:
-    name:
+    name: D:\Java\Spring\restro-restaurant\logs\application.log
 
 server:
   error:

@@ -4,7 +4,7 @@
 
     <changeSet id="0003-create-menu-table" author="rnazaryan">
         <createTable tableName="menu">
-            <column name="id" type="int(11)" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
@@ -14,7 +14,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="text"/>
-            <column name="category_id" type="int(11)">
+            <column name="category_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_manu_category" references="category(id)"/>
             </column>
         </createTable>

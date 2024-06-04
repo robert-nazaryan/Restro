@@ -4,10 +4,10 @@
 
     <changeSet id="0004-create-menu-table" author="rnazaryan">
         <createTable tableName="menu_picture">
-            <column name="id" type="int(11)" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="menu_id" type="int(11)">
+            <column name="menu_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_menu_picture_menu" references="menu(id)"/>
             </column>
             <column name="pic_name" type="varchar(255)">

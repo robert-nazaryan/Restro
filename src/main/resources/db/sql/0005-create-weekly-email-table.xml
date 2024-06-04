@@ -4,7 +4,7 @@
 
     <changeSet id="0005-weekly-email-table" author="rnazaryan">
         <createTable tableName="weekly_email">
-            <column name="id" type="int(11)" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="email" type="varchar(255)">
