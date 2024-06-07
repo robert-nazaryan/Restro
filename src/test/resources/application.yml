@@ -7,3 +7,32 @@ spring:
   h2:
     console:
       enabled: true
+  liquibase:
+    change-log: classpath*:/db/change-log.xml
+restro:
+  picture:
+    upload:
+      directory: D:\UploadDirectory
+
+logging:
+  level:
+    root: info
+    .org.restro: debug
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+  file:
+    name: D:\Java\Spring\restro-restaurant\logs\application.log
+
+server:
+  error:
+    path: /error
+
+error:
+  page:
+    path: "/errors/error"
+
+not-found:
+  page:
+    path: "/errors/404"
+
