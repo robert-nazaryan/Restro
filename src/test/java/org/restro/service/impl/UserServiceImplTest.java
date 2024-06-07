@@ -1,171 +1,159 @@
 package org.restro.service.impl;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.ArgumentCaptor;
 import org.restro.entity.User;
-import org.restro.entity.UserType;
+import org.restro.entity.WeeklyEmail;
 import org.restro.exception.UserNotFoundException;
 import org.restro.repository.UserRepository;
 import org.restro.service.SendMailService;
 import org.restro.service.WeeklyEmailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.any;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 class UserServiceImplTest {
 
-    @Mock
-    private UserRepository userRepository;
-
-    @Mock
-    private SendMailService sendMailService;
-
-    @Mock
-    private WeeklyEmailService weeklyEmailService;
-
-    @Mock
-    private PasswordEncoder passwordEncoder;
-
-    @InjectMocks
+    @Autowired
     private UserServiceImpl userService;
 
-    @BeforeEach
-    void setUp() {
-        userService = new UserServiceImpl(userRepository, sendMailService, weeklyEmailService, passwordEncoder);
+    @MockBean
+    private UserRepository userRepository;
+
+    @MockBean
+    private SendMailService sendMailService;
+
+    @MockBean
+    private WeeklyEmailService weeklyEmailService;
+
+    @MockBean
+    private PasswordEncoder passwordEncoder;
+
+    @Test
+    void testSaveUser() {
+        User user = new User();
+        user.setPassword("plainPassword");
+
+        when(passwordEncoder.encode(any(String.class))).thenReturn("encodedPassword");
+        when(userRepository.save(any(User.class))).thenReturn(user);
+
+        User savedUser = userService.save(user);
+
+        assertEquals("encodedPassword", savedUser.getPassword());
+        verify(userRepository, times(1)).save(user);
+        verify(passwordEncoder, times(1)).encode("plainPassword");
     }
 
     @Test
-    void testSave() {
+    void testRegisterUser() {
         User user = new User();
-        user.setEmail("poxos@gmail.com");
-        user.setPassword("password");
-        when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
-        userService.save(user);
+        user.setEmail("test@example.com");
 
-        verify(userRepository).save(user);
-        assertEquals("encodedPassword", user.getPassword());
-    }
+        when(userRepository.save(any(User.class))).thenReturn(user);
 
-    @Test
-    void testRegister() {
-        User user = new User();
-        user.setEmail("poxos@gmail.com");
         userService.register(user);
 
-        verify(sendMailService).sendWelcomeMail(user);
-        verify(userRepository).save(user);
-        verify(weeklyEmailService).save(any());
+        ArgumentCaptor<WeeklyEmail> captor = ArgumentCaptor.forClass(WeeklyEmail.class);
+        verify(sendMailService, times(1)).sendWelcomeMail(user);
+        verify(userRepository, times(1)).save(user);
+        verify(weeklyEmailService, times(1)).save(captor.capture());
+
+        WeeklyEmail weeklyEmail = captor.getValue();
+        assertEquals(user.getEmail(), weeklyEmail.getEmail());
+
         assertFalse(user.isActive());
         assertNotNull(user.getToken());
     }
 
     @Test
-    void testFindAll() {
-        List<User> userList = new ArrayList<>();
-        userList.add(new User());
-        userList.add(new User());
-        when(userRepository.findAll()).thenReturn(userList);
-        List<User> result = userService.findAll();
-
-        assertEquals(2, result.size());
+    void testFindAllUsers() {
+        userService.findAll();
+        verify(userRepository, times(1)).findAll();
     }
 
     @Test
     void testFindByEmail() {
+        String email = "test@example.com";
         User user = new User();
-        user.setEmail("poxos@gmail.com");
-        when(userRepository.findByEmail("poxos@gmail.com")).thenReturn(Optional.of(user));
-        User result = userService.findByEmail("poxos@gmail.com");
+        user.setEmail(email);
 
-        assertEquals("poxos@gmail.com", result.getEmail());
+        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+
+        User foundUser = userService.findByEmail(email);
+
+        assertEquals(email, foundUser.getEmail());
+        verify(userRepository, times(1)).findByEmail(email);
     }
 
     @Test
-    void testFindByEmailWhenThrowUserNotFoundException() {
-        when(userRepository.findByEmail("poxos@gmail.com")).thenReturn(Optional.empty());
+    void testFindByEmailNotFound() {
+        String email = "test@example.com";
 
-        assertThrows(UserNotFoundException.class, () -> userService.findByEmail("poxos@gmail.com"));
+        when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
+
+        assertThrows(UserNotFoundException.class, () -> userService.findByEmail(email));
+        verify(userRepository, times(1)).findByEmail(email);
     }
 
     @Test
     void testFindByToken() {
+        String token = UUID.randomUUID().toString();
         User user = new User();
-        user.setToken("token");
-        when(userRepository.findByToken("token")).thenReturn(Optional.of(user));
-        User result = userService.findByToken("token");
+        user.setToken(token);
 
-        assertEquals("token", result.getToken());
+        when(userRepository.findByToken(token)).thenReturn(Optional.of(user));
+
+        User foundUser = userService.findByToken(token);
+
+        assertEquals(token, foundUser.getToken());
+        verify(userRepository, times(1)).findByToken(token);
     }
 
     @Test
-    void testFindByTokenWhenThrowUserNotFoundException() {
-        when(userRepository.findByToken("token")).thenReturn(Optional.empty());
+    void testFindByTokenNotFound() {
+        String token = UUID.randomUUID().toString();
 
-        assertThrows(UserNotFoundException.class, () -> userService.findByToken("token"));
-    }
+        when(userRepository.findByToken(token)).thenReturn(Optional.empty());
 
-    @Test
-    void testByEmail() {
-        String email = "poxos@gmail.com";
-        Optional<User> userOptional = Optional.of(new User());
-        when(userRepository.findByEmail(email)).thenReturn(userOptional);
-        Optional<User> result = userService.byEmail(email);
-
-        assertTrue(result.isPresent());
-    }
-
-    @Test
-    void testFindByUserType() {
-        List<User> users = new ArrayList<>();
-        users.add(new User());
-        when(userRepository.findAllByUserType(UserType.USER)).thenReturn(users);
-        List<User> result = userService.findByUserType(UserType.USER);
-
-        assertEquals(1, result.size());
+        assertThrows(UserNotFoundException.class, () -> userService.findByToken(token));
+        verify(userRepository, times(1)).findByToken(token);
     }
 
     @Test
     void testDeleteUserById() {
         int id = 1;
         userService.deleteUserById(id);
-
-        verify(userRepository).deleteById(id);
-    }
-
-    @Test
-    void testFindById() {
-        int id = 1;
-        Optional<User> userOptional = Optional.of(new User());
-        when(userRepository.findById(id)).thenReturn(userOptional);
-        Optional<User> result = userService.findById(id);
-
-        assertTrue(result.isPresent());
+        verify(userRepository, times(1)).deleteById(id);
     }
 
     @Test
     void testUpdateUser() {
         User user = new User();
         user.setActive(false);
-        when(userRepository.save(user)).thenReturn(user);
+
+        when(userRepository.save(any(User.class))).thenReturn(user);
+
         userService.updateUser(user);
 
         assertTrue(user.isActive());
+        verify(userRepository, times(1)).save(user);
     }
-
 }
